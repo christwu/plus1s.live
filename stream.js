@@ -5,9 +5,13 @@ const MAX_FRAME = 360;
 let frames = new Array(MAX_FRAME);
 
 function plus1s(req, res, next) {
+    let curlMode=true;
+    let contentType = 'text/plain; charset=utf-8';
     if (!req.header("User-Agent").includes("curl")) {
-        res.redirect("https://github.com/HFO4/plus1s.live");
-        return;
+        //res.redirect("https://github.com/HFO4/plus1s.live");
+        //return;
+        curlMode = false;
+        contentType = 'text/html; charset=utf-8';
     }
     res.writeHead(200, {
         'Content-Type': 'text/plain; charset=utf-8',
@@ -15,12 +19,21 @@ function plus1s(req, res, next) {
         'X-Content-Type-Options': 'nosniff'});
     let i = 1;
     let loop = 0;
+    let j = 0;
     var io = setInterval(function () {
         if (i == MAX_FRAME) {
             i = 0;
             loop++;
         }
-        write(res, frames[i]);
+        if (curlMode) {
+            write(res, frames[i]);
+        } else {
+            res.write(`<span id="ha${j}" style="white-space: pre-wrap; font-family: monospace;">`);
+            res.write(frames[i]);
+            res.write('</span>');
+            res.write(`<script type="text/javascript" id="s${j}">window.scrollTo(0,1000000000);try{document.getElementById("ha${j-1}").remove();}catch(e){}document.getElementById("s${j}").remove();</script>`);
+            j++;
+        }
         i++;
         if (loop >= 20) {
             res.end("\nYou've waste too much time, we have to stop you.\n");
