@@ -14,7 +14,7 @@ function plus1s(req, res, next) {
         contentType = 'text/html; charset=utf-8';
     }
     res.writeHead(200, {
-        'Content-Type': 'text/plain; charset=utf-8',
+        'Content-Type': contentType,
         'Transfer-Encoding': 'chunked',
         'X-Content-Type-Options': 'nosniff'});
     let i = 1;
