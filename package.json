@@ -1,6 +1,6 @@
 {
   "name": "plus1s.live",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Your idle server can be used to plus 1s for the elder.",
   "main": "stream.js",
   "scripts": {
@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/HFO4/plus1s.live#readme",
   "dependencies": {
-    "express": "^4.16.3"
+    "winston": "^3.3.3",
+    "ws": "^7.3.1"
   }
 }
