@@ -10,6 +10,7 @@ curl 服务器地址:1926
 例如
 
 ```
+curl aoaoao.me:1926           # 服务器已被续
 curl plus1s.plusnan.me:1926
 ```
 
